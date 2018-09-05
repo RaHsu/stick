@@ -24,23 +24,25 @@
 	 </div>
 		<br>
 	</div>
-</body>
-<script type="text/javascript">
-	var app = new Vue({
-  		el: '#app',
-  		data: {
-   			tips: [
-					{content:'P标签是默认是自动换行的，因此设置好宽度之后，能够较好的实现效果，但是最近的项目中发现，使用ajax加载数据之后，p标签内的内容没有换行，导致布局错乱，于是尝试着使用换行样式，虽然解决了问题，但是并没有发现本质原因，本质在于，我当时获取的数据是一长串的数字，浏览器应该是对数字和英文单词处理方式相近，不会截断。 先给出各种方式，再具体介绍每一个属性。'},
-					{content:'fdsafdsafdsaf'},
-					{content:'fdsafdsafdsaf'}
-				],
-   			input:''
-  		},
-			methods:{
-				stick:function(){
-					console.log(this.input);
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+	  		el: '#app',
+	  		data: {
+	   			tips: [
+						{content:'P标签是默认是自动换行的，因此设置好宽度之后，能够较好的实现效果，但是最近的项目中发现，使用ajax加载数据之后，p标签内的内容没有换行，导致布局错乱，于是尝试着使用换行样式，虽然解决了问题，但是并没有发现本质原因，本质在于，我当时获取的数据是一长串的数字，浏览器应该是对数字和英文单词处理方式相近，不会截断。 先给出各种方式，再具体介绍每一个属性。'},
+						{content:'fdsafdsafdsaf'},
+						{content:'fdsafdsafdsaf'}
+					],
+	   			input:''
+	  		},
+				methods:{
+					stick:function(){
+						console.log(this.input);
+					}
 				}
-			}
-	})
-</script>
+		})
+	</script>
+</body>
+
 </html>

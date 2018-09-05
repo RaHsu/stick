@@ -1,0 +1,20 @@
+{
+  "name": "stick",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaHsu/stick.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RaHsu/stick/issues"
+  },
+  "homepage": "https://github.com/RaHsu/stick#readme"
+}
