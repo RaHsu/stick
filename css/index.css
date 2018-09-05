@@ -1,0 +1,53 @@
+#app{
+  text-align: center;
+}
+.input{
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+textarea{
+  font-size: 14px;
+}
+#submitButton{
+  width: 800px;
+  margin-top: 30px;
+  height: 40px;
+  font-size: 16px;
+}
+.tips{
+  margin: 20px auto;
+  text-align: center;
+}
+.ivu-card{
+    margin: 0 auto;
+}
+.deleteButton{
+  float: right;
+}
+.tip-items{
+  margin-top: 15px;
+}
+.tip-items h4{
+  width: 700px;
+  float: left;
+  text-align: left;
+  padding-bottom: 10px;
+}
+.tip-items button{
+  position: absolute;
+  top:5px;
+  right: 5px;
+}
+.tip-items .ivu-btn-circle{
+  width: 24px;
+  height: 24px;
+}
+.clearfix:after{
+  content:".";
+  clear:both;
+  display:block;
+  height:0;
+  overflow:hidden;
+  visibility:hidden;
+  }
