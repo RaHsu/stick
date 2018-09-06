@@ -13,12 +13,12 @@
 		<div class="">
 				<i-input v-model="input" class="input" type="textarea" :rows="6" placeholder="你想stick些什么？" />
 		</div>
-	 <i-button type="success" long id="submitButton">STICK!</i-button>
+	 <i-button type="success" long id="submitButton" @click="stick">STICK!</i-button>
 	 <div class="tips">
-		 <Card style="width:800px" class="tip-items clearfix" v-for="item in tips">
+		 <Card style="width:800px" class="tip-items clearfix" v-for="item in tips"  :key="item.id" v-model="tips">
 			 <div style="text-align:center">
 					 <h4>{{item.content}}</h4>
-					 <i-button :size="buttonSize" icon="ios-closed-captioning" type="error" shape="circle" class="deleteButton"></i-button>
+					 <i-button :size="buttonSize" icon="ios-closed-captioning" type="error" shape="circle" class="deleteButton" :id="item.id" @click="deleteTip"></i-button>
 			 </div>
 	 </Card>
 	 </div>
@@ -30,15 +30,74 @@
 	  		el: '#app',
 	  		data: {
 	   			tips: [
-						{content:'P标签是默认是自动换行的，因此设置好宽度之后，能够较好的实现效果，但是最近的项目中发现，使用ajax加载数据之后，p标签内的内容没有换行，导致布局错乱，于是尝试着使用换行样式，虽然解决了问题，但是并没有发现本质原因，本质在于，我当时获取的数据是一长串的数字，浏览器应该是对数字和英文单词处理方式相近，不会截断。 先给出各种方式，再具体介绍每一个属性。'},
-						{content:'fdsafdsafdsaf'},
-						{content:'fdsafdsafdsaf'}
 					],
 	   			input:''
 	  		},
+				created:function(){
+					var that = this;
+					$.ajax({
+										url:"http://localhost:8000/get",
+										type:'GET',
+										dataType:'JSON',
+										success:function(result){
+												console.log(result);
+												if(result!==false){
+														that.$Message.success("操作成功");
+														app.tips = result;
+														console.log(app);
+												}else{
+														that.$Message.error(result.message);
+												}
+										},
+										error:function(xhr,textStatus){
+												that.$Message.error("连接服务器失败");
+										}
+								})
+				},
 				methods:{
 					stick:function(){
-						console.log(this.input);
+						var that = this;
+						$.ajax({
+                			url:"http://localhost:8000/insert",
+                			type:'POST',
+											data:{data:this.input},
+                			dataType:'Text',
+                			success:function(result){
+                    			console.log(result);
+                    			if(result!==false){
+                        			that.$Message.success("操作成功");
+                        			this.tips = result;
+                    			}else{
+                        			that.$Message.error(result.message);
+                    			}
+                			},
+                			error:function(xhr,textStatus){
+                    			that.$Message.error("连接服务器失败");
+                			}
+            			})
+					},
+					deleteTip:function(event){
+						var that = this;
+						var id = event.target.id?event.target.id:event.target.parentNode.id;
+						console.log(id);
+						$.ajax({
+											url:"http://localhost:8000/delete",
+											data:{data:id},
+											type:'POST',
+											dataType:'JSON',
+											success:function(result){
+													console.log(result);
+													if(result!==false){
+															that.$Message.success("操作成功");
+															this.tips = result;
+													}else{
+															that.$Message.error(result.message);
+													}
+											},
+											error:function(xhr,textStatus){
+													that.$Message.error("连接服务器失败");
+											}
+								})
 					}
 				}
 		})

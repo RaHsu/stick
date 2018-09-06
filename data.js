@@ -2,25 +2,15 @@ const fs = require('fs');
 const dbFile = 'data.json';
 
 // 读取并解析json
-async readJson(){
-  let json = JSON.parse(await fs.readfile(dbFile,function(data){
-    if (err) {
-         return console.error(err);
-    }
-    return data;
-  }));
+function readJson(){
+  let json = JSON.parse(fs.readFileSync(dbFile));
   return json;
 }
 
 // 写json
-async writeJson(data){
+function writeJson(data){
   let json = JSON.stringify(data);
-  await fs.writeFile(dbFile,json,function(){
-    if (err) {
-         return console.error(err);
-      }
-      console.log("数据写入成功");
-  })
+  fs.writeFileSync(dbFile,json);
 }
 
 //生成id
@@ -40,19 +30,22 @@ db = {
     }
     json.unshift(record);
     writeJson(json);
-  }
+    return true;
+  },
   // 获取记录（字符串形式）
   get:function(){
     let json = readJson();
+
     return JSON.stringify(json);
-  }
+  },
   // 删除一条记录
   delete: function(id){
     let json = readJson();
     for(let i = 0; i < json.length; i++){
       if(json[i].id === id){
-        json.splice(index, 1);
+        json.splice(i, 1);
         console.log('删除一条记录');
+        writeJson(json);
         return true;
       }
     }
